@@ -1,0 +1,4 @@
+Model,MAE (% CPU),RMSE (% CPU),R2 Score
+Linear Regression,4.5,5.83,0.9042
+Random Forest,2.54,3.94,0.9563
+XGBoost,2.48,3.8,0.9593
