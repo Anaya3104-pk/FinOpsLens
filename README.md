@@ -1,10 +1,10 @@
-# 🔍 FinOpsLens: Automated Cloud Cost & Resource Optimizer
+# FinOpsLens: Automated Cloud Cost & Resource Optimizer
 
 **FinOpsLens** is an intelligent, data-driven cloud financial operations (FinOps) platform that targets multi-billion dollar cloud resource wastage. By combining **Supervised Time-Series Forecasting** with **Unsupervised Anomaly Detection**, the system proactively predicts scaling demands while simultaneously identifying and isolating high-cost, underutilized "Zombie Servers."
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 * **Supervised Workload Forecasting:** Utilizes an **XGBoost Regressor** to analyze cyclical traffic behaviors (e.g., peak lunch/dinner rushes, weekend surges) and predict computing loads for the next 24 hours with an exceptional **2.48% Mean Absolute Error (MAE)**.
 * **Unsupervised Waste Detection:** Leverages **DBSCAN (Density-Based Spatial Clustering)** to profile monthly server footprints. It isolates low-density, high-cost operational anomalies as noise clusters (-1), flagging them instantly as structural waste.
 * **Automated Decision Engine:** Features a rules-based cost engine that translates ML outputs into real-time dollars saved, actionable rightsizing steps, and direct termination recommendations.
@@ -12,7 +12,7 @@
 
 ---
 
-## 🏗️ System Architecture & Data Pipeline
+## System Architecture & Data Pipeline
 
 The pipeline routes raw telemetry seamlessly through distinct processing layers:
 
@@ -25,7 +25,7 @@ The pipeline routes raw telemetry seamlessly through distinct processing layers:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 * **Language:** Python 3.11+
 * **Machine Learning:** XGBoost, Scikit-Learn
 * **Data Processing:** Pandas, NumPy
@@ -33,7 +33,7 @@ The pipeline routes raw telemetry seamlessly through distinct processing layers:
 
 ---
 
-## 🏃‍♂️ Installation & Quickstart
+## Installation & Quickstart
 
 ### 1. Clone the Workspace
 ```bash

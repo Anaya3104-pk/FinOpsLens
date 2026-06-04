@@ -28,7 +28,6 @@ def generate_synthetic_data(output_path="Data/cloud_metrics.csv"):
         for srv_id, srv_meta in servers.items():
             noise = np.random.normal(0, 2)
             
-            # Scenario 1: Cyclical Web Infrastructure
             if 'web' in srv_id:
                 base_cpu = 25 + 15 * np.sin(2 * np.pi * (hour - 6) / 24) + 20 * np.sin(2 * np.pi * (hour - 15) / 12)
                 if day_of_week >= 4: base_cpu += 10
@@ -36,13 +35,11 @@ def generate_synthetic_data(output_path="Data/cloud_metrics.csv"):
                 memory = max(20, min(90, cpu * 0.8 + 15 + np.random.normal(0, 3)))
                 network_in = max(10, cpu * 1.5 + np.random.normal(0, 5))
                 
-            # Scenario 2: Steady State Background Worker Tasks
             elif 'worker' in srv_id:
                 cpu = max(35, min(65, 45 + np.random.normal(0, 4)))
                 memory = max(50, min(70, 60 + np.random.normal(0, 2)))
                 network_in = max(5, 12 + np.random.normal(0, 2))
                 
-            # Scenario 3: Cloud Waste / Unused Asset Anomaly
             elif 'zombie' in srv_id:
                 cpu = max(1, min(4, 2.1 + np.random.normal(0, 0.4)))
                 memory = max(8, min(12, 10.0 + np.random.normal(0, 0.5)))
@@ -58,7 +55,7 @@ def generate_synthetic_data(output_path="Data/cloud_metrics.csv"):
             
     df = pd.DataFrame(data_rows)
     df.to_csv(output_path, index=False)
-    print(f"✅ Raw operational metrics compiled to {output_path}")
+    print(f"Raw operational metrics compiled to {output_path}")
     return df
 
 def preprocess_metrics(input_path="Data/cloud_metrics.csv", output_path="Data/cleaned_cloud_metrics.csv"):
@@ -70,17 +67,15 @@ def preprocess_metrics(input_path="Data/cloud_metrics.csv", output_path="Data/cl
         
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     
-    # Deriving structural cyclical features
     df['hour'] = df['timestamp'].dt.hour
     df['day_of_week'] = df['timestamp'].dt.weekday
     df['is_weekend'] = df['day_of_week'].apply(lambda x: 1 if x >= 5 else 0)
     
-    # Establish sequential velocity feature (lag feature)
     df['cpu_lag_1hr'] = df.groupby('server_id')['cpu_utilization'].shift(1)
     df = df.dropna().copy()
     
     df.to_csv(output_path, index=False)
-    print(f"⚙️ Features engineered and written to {output_path}")
+    print(f"Features engineered and written to {output_path}")
     return df
 
 if __name__ == "__main__":
