@@ -4,12 +4,8 @@ import numpy as np
 import pickle
 import os
 
-# Set page configurations with professional custom layouts
 pd_st.set_page_config(page_title="FinOpsLens Dashboard", page_icon="🔍", layout="wide")
 
-# =========================================================================
-# 🎨 HIGH-CONTRAST UI & PROFESSIONAL THEME CONFIGURATION (SAFE INJECTION)
-# =========================================================================
 ui_styles = """
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -117,15 +113,11 @@ ui_styles = """
 """
 pd_st.markdown(ui_styles, unsafe_allow_html=True)
 
-# =========================================================================
-# ⚙️ SYSTEM VERIFICATION & IO OPERATIONS
-# =========================================================================
 if not os.path.exists("Data/cleaned_cloud_metrics.csv") or not os.path.exists("Data/regression_comparison.csv"):
-    pd_st.error("❌ Operational metric logs not detected. Please run '.venv\\Scripts\\python main.py' first.")
+    pd_st.error("Operational metric logs not detected. Please run '.venv\\Scripts\\python main.py' first.")
 else:
     pd_st.markdown("<h1 style='color: #ffffff; font-weight: 800;'><i class='fa-solid fa-magnifying-glass-chart' style='color:#10b981; margin-right:15px;'></i>FinOpsLens: Autonomous Cloud Cost Optimizer</h1>", unsafe_allow_html=True)
 
-    # 🎯 OBJECTIVES MATRIX PANEL
     objectives_html = """
         <div style="background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
             <h4 style="color: #10b981; margin-top:0; font-weight:700;"><i class="fa-solid fa-bullseye" style="margin-right:10px;"></i>Project Core Objectives</h4>
@@ -140,7 +132,7 @@ else:
     pd_st.markdown(objectives_html, unsafe_allow_html=True)
     pd_st.divider()
 
-    tab1, tab2 = pd_st.tabs(["🖥️ Executive Command Center", "📊 Advanced ML Benchmarking"])
+    tab1, tab2 = pd_st.tabs(["Executive Command Center", "Advanced ML Benchmarking"])
 
     df = pd.read_csv("Data/cleaned_cloud_metrics.csv")
     zombie_df = pd.read_csv("Data/zombie_analysis_output.csv")
@@ -149,9 +141,6 @@ else:
     with open('artifacts/xgboost_forecaster.pkl', 'rb') as f:
         forecaster_model = pickle.load(f)
 
-    # =========================================================================
-    # TAB 1: EXECUTIVE COMMAND CENTER
-    # =========================================================================
     with tab1:
         total_hours = df['timestamp'].nunique()
         total_current_cost = df['cost_per_hour'].sum()
@@ -197,9 +186,6 @@ else:
             chart_data.columns = ['Current Telemetry (%)', 'XGBoost Prediction Envelop (%)']
             pd_st.line_chart(chart_data, use_container_width=True)
 
-    # =========================================================================
-    # TAB 2: TECHNICAL NUMERICAL ANALYSIS MATRIX
-    # =========================================================================
     with tab2:
         pd_st.markdown("<h2 style='color: #ffffff; font-weight:700;'><i class='fa-solid fa-scale-balanced' style='color:#3b82f6; margin-right:12px;'></i>Mathematical Model Validation Matrix</h2>", unsafe_allow_html=True)
         pd_st.markdown("Mathematical evaluation summaries tracking absolute mathematical validation parameters.")

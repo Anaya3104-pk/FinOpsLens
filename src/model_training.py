@@ -37,13 +37,13 @@ def train_workload_forecaster(data_path="Data/cleaned_cloud_metrics.csv"):
         
         mae = mean_absolute_error(y_test, preds)
         rmse = np.sqrt(mean_squared_error(y_test, preds))
-        r2 = r2_score(y_test, preds) # Calculate R2 Score
+        r2 = r2_score(y_test, preds)
         
         comparison_results.append({
             "Model": name,
             "MAE (% CPU)": round(mae, 2),
             "RMSE (% CPU)": round(rmse, 2),
-            "R2 Score": round(r2, 4) # Saving R2 Score
+            "R2 Score": round(r2, 4)
         })
         trained_models[name] = model
 
@@ -54,7 +54,7 @@ def train_workload_forecaster(data_path="Data/cleaned_cloud_metrics.csv"):
     with open('artifacts/xgboost_forecaster.pkl', 'wb') as f:
         pickle.dump(trained_models["XGBoost"], f)
         
-    print("📈 Regression Model Comparison with R2 Complete!")
+    print("Regression Model Comparison with R2 Complete!")
     return trained_models["XGBoost"], X_test, y_test
 
 def detect_zombie_servers(data_path="Data/cleaned_cloud_metrics.csv"):
@@ -78,5 +78,5 @@ def detect_zombie_servers(data_path="Data/cleaned_cloud_metrics.csv"):
     server_profiles['is_zombie'] = (server_profiles['cluster'] == -1) & (server_profiles['cpu_utilization'] < 10.0)
     
     server_profiles.to_csv("Data/zombie_analysis_output.csv", index=False)
-    print("🚨 DBSCAN Complete.")
+    print("DBSCAN Complete.")
     return server_profiles
