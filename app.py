@@ -141,7 +141,7 @@ ui_styles = """
     </style>
 """
 
-pd_st.markdown(ui_styles, unsafe_allow_html=True)
+pd_st.html(ui_styles)
 
 # SYSTEM VERIFICATION & IO OPERATIONS
 if not os.path.exists("Data/cleaned_cloud_metrics.csv") or not os.path.exists("Data/regression_comparison.csv"):
@@ -202,7 +202,7 @@ else:
         </div>
     """
 
-    pd_st.markdown(objectives_html, unsafe_allow_html=True)
+    pd_st.html(objectives_html)
     pd_st.divider()
 
     tab1, tab2 = pd_st.tabs(
@@ -459,7 +459,7 @@ else:
                 </div>
             """
 
-            pd_st.markdown(km_html, unsafe_allow_html=True)
+            pd_st.html(km_html)
 
         with col_db:
             total_detected_clusters = (
@@ -506,4 +506,4 @@ else:
                 </div>
             """
 
-            pd_st.markdown(db_html, unsafe_allow_html=True)
+            pd_st.html(db_html)
