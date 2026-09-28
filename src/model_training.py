@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import os
-import pickle
 from xgboost import XGBRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -49,10 +48,9 @@ def train_workload_forecaster(data_path="Data/cleaned_cloud_metrics.csv"):
 
     comp_df = pd.DataFrame(comparison_results)
     comp_df.to_csv("Data/regression_comparison.csv", index=False)
-    
+
     os.makedirs('artifacts', exist_ok=True)
-    with open('artifacts/xgboost_forecaster.pkl', 'wb') as f:
-        pickle.dump(trained_models["XGBoost"], f)
+    trained_models["XGBoost"].save_model('artifacts/xgboost_forecaster.json')
         
     print("Regression Model Comparison with R2 Complete!")
     return trained_models["XGBoost"], X_test, y_test
