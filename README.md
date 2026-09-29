@@ -1,5 +1,9 @@
 # FinOpsLens: Automated Cloud Cost & Resource Optimizer
 
+## 🚀 Live Demo
+
+[View Live Dashboard](https://fin-ops-lens.vercel.app/)
+
 **FinOpsLens** is an intelligent, data-driven cloud financial operations (FinOps) platform that targets multi-billion dollar cloud resource wastage. By combining **Supervised Time-Series Forecasting** with **Unsupervised Anomaly Detection**, the system proactively predicts scaling demands while simultaneously identifying and isolating high-cost, underutilized "Zombie Servers."
 
 ---
