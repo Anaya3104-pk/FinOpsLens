@@ -35,10 +35,9 @@ import {
 // API
 
 const API_URL =
-  typeof window !== "undefined" && window.location.port === "3000"
-    ? `http://${window.location.hostname}:8000/api`
-    : "/api";
-
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8000/api"
+    : "https://finopslens-api.onrender.com/api";
 
 // TYPES
 
